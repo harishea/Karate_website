@@ -261,7 +261,135 @@ nav.rounded-nav {
   border-bottom: 4px solid var(--accent-yellow);
   background: rgba(255, 255, 255, 0.05);
 }
+/* =========================================
+   KEY ROLES & EXPERTISE SECTION
+========================================= */
+.roles-section {
+  padding: 80px 8%;
+  /* Adds a very subtle gradient background to separate it from other sections */
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 12, 1) 0%,
+    rgba(18, 18, 22, 1) 100%
+  );
+}
 
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.role-card {
+  padding: 40px 30px;
+  text-align: center;
+  transition: 0.4s ease-in-out;
+  border-top: 4px solid transparent; /* Hidden border for hover effect */
+}
+
+.role-card:hover {
+  transform: translateY(-10px);
+  border-top: 4px solid var(--primary-red);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.role-card.highlight-card {
+  border-top: 4px solid var(--accent-yellow);
+  background: rgba(255, 235, 59, 0.03);
+}
+
+.role-card.highlight-card:hover {
+  border-color: var(--accent-yellow);
+}
+
+.role-icon {
+  font-size: 3.5rem;
+  color: var(--primary-red);
+  margin-bottom: 25px;
+}
+
+.role-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+}
+
+.role-card p {
+  color: #bbb;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+/* =========================================
+   CLASS SCHEDULE SECTION
+========================================= */
+.schedule-section {
+  padding: 80px 8%;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.schedule-card {
+  padding: 40px 30px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.schedule-card:hover {
+  transform: translateY(-5px);
+  border-bottom: 4px solid var(--primary-red);
+}
+
+.schedule-card.highlight-card {
+  background: rgba(255, 235, 59, 0.05); /* Slight yellow tint */
+}
+
+.schedule-card.highlight-card:hover {
+  border-color: var(--accent-yellow);
+}
+
+.schedule-icon {
+  font-size: 3rem;
+  color: var(--primary-red);
+  margin-bottom: 20px;
+}
+
+.schedule-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.schedule-card .days {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+  letter-spacing: 1px;
+}
+
+.schedule-card .times {
+  list-style: none;
+  padding: 0;
+  color: #bbb;
+}
+
+.schedule-card .times li {
+  margin-bottom: 12px;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.schedule-card .times i {
+  color: var(--accent-yellow);
+}
 /* Infinite Scroll Logic */
 .gallery {
   padding: 80px 0;
