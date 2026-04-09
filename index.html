@@ -11,6 +11,185 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Dropdown Styling */
+    .field-box select {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--glass-border);
+      padding: 18px;
+      border-radius: 10px;
+      color: white;
+      font-size: 1.1rem;
+      font-family: "Poppins", sans-serif;
+      transition: all 0.3s ease;
+      appearance: none;
+    }
+
+    .field-box select:focus {
+      outline: none;
+      border-color: var(--primary-red);
+      background: rgba(211, 47, 47, 0.05);
+    }
+
+    .field-box select option {
+      background: var(--dark-bg);
+      color: white;
+    }
+
+    /* 4-Item Services Grid (Desktop to Mobile) */
+    .programs-grid {
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 1024px) {
+      .programs-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .programs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Specialized Courses Styling */
+    .course-card {
+      text-align: left;
+    }
+
+    .course-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .course-list {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    .course-list li {
+      margin-bottom: 12px;
+      color: #ddd;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .course-list li i {
+      color: var(--accent-yellow);
+      margin-top: 4px;
+      font-size: 1.1rem;
+    }
+
+    /* Horizontal Scrolling Gallery */
+    .gallery-container {
+      padding: 20px 0;
+      width: 100%;
+    }
+
+    .gallery-category-title {
+      color: var(--light-text);
+      font-size: 1.6rem;
+      margin-top: 40px;
+      margin-bottom: 15px;
+      padding-left: 8%;
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      border-left: 4px solid var(--primary-red);
+      margin-left: 8%;
+      line-height: 1;
+    }
+
+    .gallery-scroll-track {
+      display: flex;
+      overflow-x: auto;
+      gap: 20px;
+      padding: 10px 8% 30px 8%;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      /* Hide scrollbar Firefox */
+    }
+
+    .gallery-scroll-track::-webkit-scrollbar {
+      display: none;
+      /* Hide scrollbar Chrome/Safari */
+    }
+
+    .gallery-img {
+      flex: 0 0 auto;
+      width: 300px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: zoom-in;
+      transition: transform 0.3s ease, border 0.3s ease;
+      border: 2px solid var(--glass-border);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.03);
+      border-color: var(--accent-yellow);
+    }
+
+    /* Fullscreen Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.92);
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: white;
+      font-size: 50px;
+      font-weight: 300;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .close-lightbox:hover {
+      color: var(--primary-red);
+    }
+  </style>
 </head>
 
 <body>
@@ -23,22 +202,32 @@
       <div class="logo">ANITHA KARATE<span class="text-red">.COM</span></div>
       <ul class="nav-links">
         <li><a href="#about">ABOUT</a></li>
-        <li><a href="#schedule">PROGRAMS</a></li>
-        <li><a href="gallary.html">GALLERY</a></li>
-        <li><a href="#book-classes">CONTACT</a></li>
+        <li><a href="#programs">SERVICES</a></li>
+        <li><a href="#schedule">TIMINGS</a></li>
+        <li><a href="#gallery">GALLERY</a></li>
+        <li><a href="#contact">CONTACT</a></li>
       </ul>
-      <a href="#book-classes" class="nav-btn-wrapper"><button class="btn-red">REGISTER NOW</button></a>
+      <a href="#book-classes" class="nav-btn-wrapper"><button class="btn-red">JOIN A CLASS</button></a>
     </nav>
   </header>
 
   <section class="hero">
     <div class="hero-content">
-      <h1>NOT JUST SPORT. <span class="text-yellow">NOT JUST FITNESS.</span></h1>
-      <p>It's how you live, move, and stay safe. Train your body, awaken your power, and learn to own both.</p>
+      <h1>Transforming Lives Through <span class="text-yellow">Karate, Discipline & Self-Defense</span></h1>
+      <p>With over 22 years of experience, I am dedicated to shaping strong, confident, and disciplined individuals
+        through the art of Karate and self-defense training. My mission is to empower children, students, and
+        professionals with physical fitness, mental strength, and life skills.</p>
+
+      <div class="hero-stats" style="display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap;">
+        <a href="#book-classes"><button class="btn-red">Join a Class</button></a>
+        <a href="#book-classes"><button class="btn-red"
+            style="background: transparent; border: 2px solid var(--accent-yellow); color: var(--accent-yellow);">Book a
+            Workshop</button></a>
+      </div>
+
       <div class="hero-stats">
         <div class="stats-box glass-panel">
-          <span>Karate is Not a Sport. It's a Way of Life.</span>
-          <a href="#book-classes"><button class="btn-red">JOIN NOW</button></a>
+          <span><strong>22+ Years of Experience</strong> | 1000+ Students Trained</span>
         </div>
       </div>
     </div>
@@ -54,72 +243,111 @@
         <img src="images/Karate pics/P1.jpeg" alt="Shihan V. Anitha Training">
       </div>
       <div class="about-text glass-panel">
-        <h2 class="section-title text-left">Meet <span class="text-yellow">Shihan V.Anitha</span></h2>
-        <p>I’m Anitha – a dedicated karate practitioner, women’s self-defense coach, and personal safety strategist. My
-          mission is to make every woman feel safe, strong, and in control of her life.</p>
-        <p style="margin-top: 15px; color: #ccc;">Karate gave me more than discipline and technique—it taught me
-          awareness, focus, and inner strength. I teach self-defense to ensure women are not just told to be careful,
-          but taught how to be powerful.</p>
+        <h2 class="section-title text-left">About <span class="text-yellow">Me</span></h2>
+        <p>I am a passionate Karate Master and Self-Defense Trainer with more than 22 years of experience in training
+          students of all ages. My journey in martial arts is driven by a deep commitment to discipline, respect, and
+          personal growth.</p>
+        <p style="margin-top: 15px; color: #ccc;">Over the years, I have trained hundreds of students, helping them
+          build confidence, improve physical fitness, and develop a strong mindset. My teaching goes beyond techniques —
+          I focus on shaping character, leadership, and resilience.</p>
+
+        <h3 style="margin-top: 25px; font-size: 1.2rem; color: var(--primary-red);">My Mission</h3>
+        <p style="margin-top: 5px; color: #ccc;">My mission is to improve the lives of children and individuals by
+          combining fitness, discipline, and intellectual development through Karate. I aim to build confidence and
+          self-discipline.</p>
+
         <ul class="about-features">
-          <li><i class="fas fa-check-circle"></i> 5th Dan Black Belt (Since 2004) & National Coach</li>
-          <li><i class="fas fa-check-circle"></i> 5000+ Students Trained in Personal Safety</li>
-          <li><i class="fas fa-check-circle"></i> First Aid CPR AED Certified (American Heart Association)</li>
+          <li><i class="fas fa-check-circle"></i> 22+ Years of Experience in Karate Training</li>
+          <li><i class="fas fa-check-circle"></i> 1000+ Students Trained</li>
+          <li><i class="fas fa-check-circle"></i> Conducted Workshops in Schools, Colleges & Corporates</li>
+          <li><i class="fas fa-check-circle"></i> Expert in Self-Defense & Personal Safety Training</li>
         </ul>
       </div>
     </div>
   </section>
-  <section id="roles" class="roles-section">
-    <h2 class="section-title">Her <span class="text-red">Expertise</span></h2>
+
+  <section id="achievements" class="roles-section">
+    <h2 class="section-title">Our <span class="text-red">Achievements</span></h2>
     <p
       style="text-align: center; color: #ccc; margin-bottom: 50px; font-size: 1.1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-      Train with <strong>Shihan Anitha</strong> — bringing decades of experience across martial arts, practical combat,
-      and mental conditioning.
+      A legacy built on discipline, dedication, and consistent excellence in martial arts and personal development.
     </p>
 
     <div class="roles-grid">
       <div class="role-card glass-panel">
-        <i class="fas fa-user-ninja role-icon"></i>
-        <h3>Karate Master</h3>
-        <p>Expert instruction in traditional techniques, focusing on extreme discipline, physical conditioning, and
-          perfect form.</p>
+        <i class="fas fa-award role-icon"></i>
+        <h3>Instructor Achievements</h3>
+        <p>Black Belt certified with extensive State and National Level participation. Recognized as a Certified
+          Self-Defense Trainer by premier institutions and organizations.</p>
       </div>
 
       <div class="role-card glass-panel highlight-card">
-        <i class="fas fa-shield-alt role-icon text-yellow"></i>
-        <h3 class="text-yellow">Self-Defense Coach</h3>
-        <p>Practical, real-world combat and defense skills specifically tailored to empower women and ensure physical
-          safety.</p>
-      </div>
-
-      <div class="role-card glass-panel">
-        <i class="fas fa-brain role-icon"></i>
-        <h3>Safety Strategist</h3>
-        <p>Mental conditioning, situational awareness, and boundary-setting strategies to prevent and navigate dangerous
-          situations before they happen.</p>
+        <i class="fas fa-medal role-icon text-yellow"></i>
+        <h3 class="text-yellow">Student Achievements</h3>
+        <p>Our students consistently win medals in district and state-level competitions. They have shown immense
+          improvement in confidence, discipline, leadership skills, and physical fitness.</p>
       </div>
     </div>
   </section>
+
   <section id="programs" class="programs">
-    <h2 class="section-title">Signature <span class="text-red">Courses</span></h2>
+    <h2 class="section-title">Training <span class="text-red">Services</span></h2>
     <div class="programs-grid">
       <div class="program-card glass-panel">
-        <i class="fas fa-shield-alt program-icon"></i>
-        <h3>Shield Within</h3>
-        <p>Master mental readiness, boundary-setting, and situational awareness to prevent or handle real-world dangers
-          confidently.</p>
+        <i class="fas fa-user-ninja program-icon"></i>
+        <h3>Karate Classes</h3>
+        <p>Structured training for beginners to advanced students focusing on techniques, forms, and absolute
+          discipline.</p>
       </div>
       <div class="program-card glass-panel">
-        <i class="fas fa-bolt program-icon"></i>
-        <h3>Power Unseen</h3>
-        <p>Unlock your inner warrior. Move beyond physical techniques and discover the strategic thinking needed for
-          true empowerment.</p>
+        <i class="fas fa-shield-alt program-icon text-yellow"></i>
+        <h3 class="text-yellow">Self-Defense</h3>
+        <p>Practical and real-life self-defense techniques designed for safety, heightened awareness, and personal
+          confidence.</p>
       </div>
       <div class="program-card glass-panel">
-        <i class="fas fa-dumbbell program-icon"></i>
-        <h3>Strength Beyond Muscle</h3>
-        <p>Fitness is a life skill, not a luxury. Connect physical conditioning with emotional resilience and powerful
-          everyday presence.</p>
+        <i class="fas fa-child program-icon"></i>
+        <h3>Kids Program</h3>
+        <p>Specially designed sessions to improve children's focus, physical fitness, and behavior through fun and
+          discipline.</p>
       </div>
+      <div class="program-card glass-panel">
+        <i class="fas fa-briefcase program-icon text-yellow"></i>
+        <h3 class="text-yellow">Corporate Workshops</h3>
+        <p>Professional training sessions for corporate employees focusing on self-defense, stress management, and
+          workplace fitness.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="special-courses" class="programs" style="padding-top: 20px;">
+    <h2 class="section-title">Specialized <span class="text-yellow">Courses Offer</span></h2>
+    <div class="roles-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+
+      <div class="role-card course-card glass-panel">
+        <i class="fas fa-eye role-icon" style="text-align: center; display: block;"></i>
+        <h3> Invisible Patterns<br><span style="font-size: 1rem; color: #aaa; font-weight: 400;">Beyond
+            Instinct</span></h3>
+        <ul class="course-list">
+          <li><i class="fas fa-check"></i> Spot hidden risks early</li>
+          <li><i class="fas fa-check"></i> Decode behavior & intent</li>
+          <li><i class="fas fa-check"></i> Trust instincts with clarity</li>
+          <li><i class="fas fa-check"></i> Prevent escalation proactively</li>
+        </ul>
+      </div>
+
+      <div class="role-card course-card glass-panel highlight-card">
+        <i class="fas fa-crown role-icon text-yellow" style="text-align: center; display: block;"></i>
+        <h3 class="text-yellow"> Personal Power<br><span
+            style="font-size: 1rem; color: #aaa; font-weight: 400;">Dynamics</span></h3>
+        <ul class="course-list">
+          <li><i class="fas fa-bolt"></i> Build strong presence</li>
+          <li><i class="fas fa-bolt"></i> Communicate with authority</li>
+          <li><i class="fas fa-bolt"></i> Set clear boundaries</li>
+          <li><i class="fas fa-bolt"></i> Stay calm under pressure</li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
@@ -156,6 +384,63 @@
       </div>
     </div>
   </section>
+
+  <section id="gallery" class="gallery-container">
+    <h2 class="section-title" style="margin-bottom: 10px;">Our <span class="text-yellow">Gallery</span></h2>
+    <p style="text-align: center; color: #ccc; margin-bottom: 20px; font-size: 1.1rem;">Swipe horizontally to explore
+      each category. Click any image to view full screen.</p>
+
+    <h3 class="gallery-category-title">Training Sessions</h3>
+    <div class="gallery-scroll-track">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Training Session 1">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Training Session 2">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Training Session 3">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Training Session 4">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Training Session 5">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Training Session 6">
+    </div>
+
+    <h3 class="gallery-category-title">Competitions</h3>
+    <div class="gallery-scroll-track">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Competition 1">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Competition 2">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Competition 3">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Competition 4">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Competition 5">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Competition 6">
+    </div>
+
+    <h3 class="gallery-category-title">Workshops</h3>
+    <div class="gallery-scroll-track">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Workshop 1">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Workshop 2">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Workshop 3">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Workshop 4">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Workshop 5">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Workshop 6">
+    </div>
+
+    <h3 class="gallery-category-title">Student Achievements</h3>
+    <div class="gallery-scroll-track">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Achievement 1">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Achievement 2">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Achievement 3">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Achievement 4">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Achievement 5">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Achievement 6">
+    </div>
+
+    <h3 class="gallery-category-title">Events & Seminars</h3>
+    <div class="gallery-scroll-track">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Event 1">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Event 2">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Event 3">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Event 4">
+      <img src="images/Karate pics/P1.jpeg" class="gallery-img glass-panel" alt="Event 5">
+      <img src="images/Karate pics/P2.jpeg" class="gallery-img glass-panel" alt="Event 6">
+    </div>
+  </section>
+
   <section class="testimonials">
     <h2 class="section-title">Student <span class="text-yellow">Voices</span></h2>
     <div class="scrolling-wrapper">
@@ -170,8 +455,8 @@
           <h4>- Karshma</h4>
         </div>
         <div class="test-box glass-panel">
-          <p>"As a working woman commuting late at night, I always felt nervous. After attending the ‘Shield Within’
-            workshop, I feel more in control."</p>
+          <p>"As a working woman commuting late at night, I always felt nervous. After attending the workshop, I feel
+            more in control."</p>
           <h4>- Jayashree</h4>
         </div>
         <div class="test-box glass-panel">
@@ -184,20 +469,6 @@
             It’s a necessity, not an option."</p>
           <h4>- Sangeetha</h4>
         </div>
-        <div class="test-box glass-panel">
-          <p>"Her sessions combine karate basics with practical safety tips that actually work in real life. Every woman
-            should experience this."</p>
-          <h4>- Nivetha</h4>
-        </div>
-        <div class="test-box glass-panel">
-          <p>"Her way of teaching isn’t just about kicks and punches—it’s about mindset and strength from within."</p>
-          <h4>- Priya Dharshini</h4>
-        </div>
-        <div class="test-box glass-panel">
-          <p>"She doesn’t just teach us how to fight—she teaches us how not to freeze, how to speak up, and how to stay
-            safe. That’s real empowerment."</p>
-          <h4>- Karshma</h4>
-        </div>
       </div>
     </div>
   </section>
@@ -206,10 +477,10 @@
     <div class="cta-banner glass-panel">
       <div class="cta-text">
         <h2 class="text-yellow">Ready to Begin Your Journey?</h2>
-        <p>Join Anitha's Karate and discover your true strength.</p>
+        <p>Join Anitha's Karate and discover your true physical and mental strength.</p>
       </div>
-      <a href="#book-classes"><button class="btn-red" style="padding: 15px 40px; font-size: 1.1rem;">REGISTER
-          TODAY</button></a>
+      <a href="#book-classes"><button class="btn-red" style="padding: 15px 40px; font-size: 1.1rem;">BOOK YOUR
+          SESSION</button></a>
     </div>
   </section>
 
@@ -224,12 +495,11 @@
       </div>
 
       <div class="contact-card glass-panel highlight-card">
-        <div class="contact-icon text-yellow"><i class="fas fa-award"></i></div>
-        <h3 class="text-yellow">Trusted By</h3>
-        <p style="font-weight: 500; font-size: 1rem;">Corporate & Institutional Workshops</p>
-        <p style="color: #aaa; font-size: 0.9rem;">Taj Connemara, RMZ Tata Comm., Park Hyatt, MGR University & Govt.
-          Schools</p>
-        <span class="sub-text">Awarded Young Achiever by JBAS College</span>
+        <div class="contact-icon text-yellow"><i class="fab fa-whatsapp"></i></div>
+        <h3 class="text-yellow">WhatsApp Us</h3>
+        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 5px;">Chat with us for quick responses</p>
+        <a href="https://wa.me/919566179262" target="_blank" style="font-size: 1.2rem; margin-top: 10px;">+91 95661
+          79262</a>
       </div>
 
       <div class="contact-card glass-panel">
@@ -241,57 +511,68 @@
 
     </div>
   </section>
+
   <section id="book-classes" class="booking-section-full">
     <div class="booking-content-wrapper glass-panel">
       <div class="booking-header">
-        <h2 class="form-title">BOOK YOUR <span class="text-yellow">CLASSES</span></h2>
-        <p class="form-subtitle">Start your journey with Anitha's Karate today.</p>
+        <h2 class="form-title">BOOK A <span class="text-yellow">SESSION</span></h2>
+        <p class="form-subtitle">Interested in joining or organizing a workshop? Get in touch today!</p>
       </div>
 
       <form action="https://api.web3forms.com/submit" method="POST" id="contact-form" class="modern-form">
         <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-        <input type="hidden" name="subject" value="New Class Booking - AAA Academy">
+        <input type="hidden" name="subject" value="New Inquiry - Anitha's Karate">
         <input type="checkbox" name="botcheck" style="display: none;">
 
         <div class="form-grid-layout">
           <div class="field-box">
             <label>Full Name</label>
-            <input type="text" name="name" placeholder="Enter student name" required>
+            <input type="text" name="name" placeholder="Enter your name" required>
           </div>
+
           <div class="field-box">
             <label>Email Address</label>
             <input type="email" name="email" placeholder="example@email.com" required>
           </div>
+
           <div class="field-box">
             <label>Phone Number</label>
             <input type="tel" name="phone" placeholder="Your contact number" required>
           </div>
+
           <div class="field-box">
-            <label>WhatsApp Number</label>
-            <input type="tel" name="whatsapp" placeholder="WhatsApp number for updates">
+            <label>Type of Inquiry</label>
+            <select name="inquiry_type" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="Class">Join a Class</option>
+              <option value="Workshop">Book a Workshop</option>
+              <option value="Corporate Training">Corporate Training</option>
+            </select>
           </div>
+
           <div class="field-box full-span">
-            <label>Message / Program Details</label>
-            <textarea name="message" rows="4" placeholder="Tell us about the student's age or specific interests..."
-              required></textarea>
+            <label>Message</label>
+            <textarea name="message" rows="4"
+              placeholder="Tell us more about your requirements or specific interests..." required></textarea>
           </div>
         </div>
 
         <div class="submit-area">
-          <button type="submit" class="btn-red large-btn">CONFIRM MY BOOKING</button>
+          <button type="submit" class="btn-red large-btn">SEND INQUIRY</button>
           <div id="result" class="form-status"></div>
         </div>
       </form>
     </div>
   </section>
+
   <footer class="modern-footer">
     <div class="footer-top dual-col">
       <div class="footer-col about-col">
         <div class="logo" style="margin-bottom: 15px;">ANITHA KARATE<br><span class="text-red">.COM</span></div>
-        <p>Reach out to us at our dojo or call us to know more about our programs and schedules.</p>
+        <p>Reach out to us at our dojo or call us to know more about our classes, corporate training, and schedules.</p>
         <div class="social-icons">
-          <a class="glass-icon" href="https://www.instagram.com/p/DUSqblqDA08/?igsh=MXJjZWN1MWl2dmg0Ng%3D%3D"><i
-              class="fab fa-instagram"></i></a>
+          <a class="glass-icon" href="https://www.instagram.com/p/DUSqblqDA08/?igsh=MXJjZWN1MWl2dmg0Ng%3D%3D"
+            target="_blank"><i class="fab fa-instagram"></i></a>
           <a class="glass-icon" href="#"><i class="fab fa-facebook"></i></a>
           <a class="glass-icon" href="https://wa.me/919566179262" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
@@ -314,7 +595,49 @@
     </div>
   </footer>
 
+  <div id="imageLightbox" class="lightbox">
+    <span class="close-lightbox" id="closeLightbox">&times;</span>
+    <img class="lightbox-content" id="lightboxImg" src="">
+  </div>
+
   <script src="script.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const lightbox = document.getElementById("imageLightbox");
+      const lightboxImg = document.getElementById("lightboxImg");
+      const closeBtn = document.getElementById("closeLightbox");
+      const galleryImages = document.querySelectorAll(".gallery-img");
+
+      // Open lightbox on image click
+      galleryImages.forEach(img => {
+        img.addEventListener("click", () => {
+          lightbox.style.display = "flex";
+          lightboxImg.src = img.src;
+        });
+      });
+
+      // Close on X click
+      closeBtn.addEventListener("click", () => {
+        lightbox.style.display = "none";
+      });
+
+      // Close on background click
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          lightbox.style.display = "none";
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.style.display === "flex") {
+          lightbox.style.display = "none";
+        }
+      });
+    });
+  </script>
+
 </body>
 
 </html>
