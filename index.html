@@ -56,12 +56,24 @@
       }
     }
 
-    /* Specialized Courses Styling */
-    .course-card {
-      text-align: left;
+    /* SPECIALIZED COURSES FLEX LAYOUT (For Centering 2nd Row) */
+    .courses-flex-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
     }
 
-    .course-card h3 {
+    .courses-flex-container .role-card {
+      flex: 1 1 calc(33.333% - 30px);
+      max-width: 400px;
+      min-width: 300px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .courses-flex-container .course-card h3 {
       font-size: 1.5rem;
       margin-bottom: 15px;
       text-align: center;
@@ -70,7 +82,8 @@
     .course-list {
       list-style-type: none;
       padding: 0;
-      margin-top: 20px;
+      margin-top: 15px;
+      flex-grow: 1;
     }
 
     .course-list li {
@@ -88,6 +101,46 @@
       font-size: 1.1rem;
     }
 
+    @media (max-width: 1024px) {
+      .courses-flex-container .role-card {
+        flex: 1 1 calc(50% - 30px);
+        /* 2 per row on tablets */
+        padding: 30px 20px;
+      }
+
+      .course-card h3 {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .courses-flex-container .role-card {
+        flex: 1 1 100%;
+        /* 1 per row on mobile */
+        padding: 25px 15px;
+      }
+
+      .course-list li {
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Highlighted Heritage Block */
+    .heritage-block {
+      margin-top: 35px;
+      padding: 20px 25px;
+      border-left: 5px solid var(--accent-yellow);
+      background: rgba(255, 235, 59, 0.05);
+      text-align: left;
+    }
+
+    .heritage-block h4 {
+      color: var(--accent-yellow);
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+    }
+
     /* Horizontal Scrolling Gallery */
     .gallery-container {
       padding: 20px 0;
@@ -99,11 +152,9 @@
       font-size: 1.6rem;
       margin-top: 40px;
       margin-bottom: 15px;
-      padding-left: 8%;
+      text-align: center;
       font-family: "Montserrat", sans-serif;
       text-transform: uppercase;
-      border-left: 4px solid var(--primary-red);
-      margin-left: 8%;
       line-height: 1;
     }
 
@@ -115,12 +166,10 @@
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      /* Hide scrollbar Firefox */
     }
 
     .gallery-scroll-track::-webkit-scrollbar {
       display: none;
-      /* Hide scrollbar Chrome/Safari */
     }
 
     .gallery-img {
@@ -189,6 +238,52 @@
     .close-lightbox:hover {
       color: var(--primary-red);
     }
+
+    /* =========================================
+       HERO MOBILE FIXES (Text & Buttons)
+    ========================================= */
+    .hero-buttons-wrapper {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content {
+        padding: 0 15px;
+        /* Ensures text doesn't touch the very edge */
+        width: 100%;
+      }
+
+      /* Dynamically scales text down, preventing "TRANSFORMING" from breaking screen width */
+      .hero-content h1 {
+        font-size: clamp(2rem, 7vw, 3rem);
+        line-height: 1.1;
+        word-break: break-word;
+        /* Safety fail-safe */
+      }
+
+      .hero-content p {
+        font-size: 0.95rem;
+      }
+
+      /* Forces buttons to stack and take full width so they don't squeeze */
+      .hero-buttons-wrapper {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero-buttons-wrapper a {
+        width: 100%;
+      }
+
+      .hero-buttons-wrapper .btn-red {
+        width: 100%;
+        padding: 15px 20px;
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 
@@ -218,14 +313,14 @@
         through the art of Karate and self-defense training. My mission is to empower children, students, and
         professionals with physical fitness, mental strength, and life skills.</p>
 
-      <div class="hero-stats" style="display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap;">
+      <div class="hero-buttons-wrapper">
         <a href="#book-classes"><button class="btn-red">Join a Class</button></a>
         <a href="#book-classes"><button class="btn-red"
             style="background: transparent; border: 2px solid var(--accent-yellow); color: var(--accent-yellow);">Book a
             Workshop</button></a>
       </div>
 
-      <div class="hero-stats">
+      <div class="hero-stats" style="margin-top: 30px;">
         <div class="stats-box glass-panel">
           <span><strong>22+ Years of Experience</strong> | 1000+ Students Trained</span>
         </div>
@@ -247,7 +342,7 @@
         <p>I am a passionate Karate Master and Self-Defense Trainer with more than 22 years of experience in training
           students of all ages. My journey in martial arts is driven by a deep commitment to discipline, respect, and
           personal growth.</p>
-        <p style="margin-top: 15px; color: #ccc;">Over the years, I have trained hundreds of students, helping them
+        <p style="margin-top: 15px; color: #ccc;">Over the years, I have trained Thousand of students, helping them
           build confidence, improve physical fitness, and develop a strong mindset. My teaching goes beyond techniques —
           I focus on shaping character, leadership, and resilience.</p>
 
@@ -262,6 +357,14 @@
           <li><i class="fas fa-check-circle"></i> Conducted Workshops in Schools, Colleges & Corporates</li>
           <li><i class="fas fa-check-circle"></i> Expert in Self-Defense & Personal Safety Training</li>
         </ul>
+
+        <div class="heritage-block glass-panel">
+          <h4>Instructor Heritage</h4>
+          <p style="font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 5px;">Anitha</p>
+          <p style="color: #ccc; font-style: italic;">Proudly trained under <strong>Hanshi A. Appuraj</strong><br>at the
+            Alan Thilak Karate School.</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -277,7 +380,7 @@
       <div class="role-card glass-panel">
         <i class="fas fa-award role-icon"></i>
         <h3>Instructor Achievements</h3>
-        <p>Black Belt certified with extensive State and National Level participation. Recognized as a Certified
+        <p>Black Belt certified with extensive State and National Level Championship. Recognized as a Certified
           Self-Defense Trainer by premier institutions and organizations.</p>
       </div>
 
@@ -322,12 +425,13 @@
 
   <section id="special-courses" class="programs" style="padding-top: 20px;">
     <h2 class="section-title">Specialized <span class="text-yellow">Courses Offer</span></h2>
-    <div class="roles-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+
+    <div class="courses-flex-container">
 
       <div class="role-card course-card glass-panel">
         <i class="fas fa-eye role-icon" style="text-align: center; display: block;"></i>
-        <h3> Invisible Patterns<br><span style="font-size: 1rem; color: #aaa; font-weight: 400;">Beyond
-            Instinct</span></h3>
+        <h3> Invisible Patterns<br><span style="font-size: 1rem; color: #aaa; font-weight: 400;">Beyond Instinct</span>
+        </h3>
         <ul class="course-list">
           <li><i class="fas fa-check"></i> Spot hidden risks early</li>
           <li><i class="fas fa-check"></i> Decode behavior & intent</li>
@@ -345,6 +449,41 @@
           <li><i class="fas fa-bolt"></i> Communicate with authority</li>
           <li><i class="fas fa-bolt"></i> Set clear boundaries</li>
           <li><i class="fas fa-bolt"></i> Stay calm under pressure</li>
+        </ul>
+      </div>
+
+      <div class="role-card course-card glass-panel">
+        <i class="fas fa-shield-virus role-icon" style="text-align: center; display: block;"></i>
+        <h3> Shield Within<br><span style="font-size: 1rem; color: #aaa; font-weight: 400;">Mental Defense</span></h3>
+        <ul class="course-list">
+          <li><i class="fas fa-check"></i> Master emotional regulation</li>
+          <li><i class="fas fa-check"></i> Build profound mental resilience</li>
+          <li><i class="fas fa-check"></i> Deflect verbal & psychological attacks</li>
+          <li><i class="fas fa-check"></i> Maintain absolute inner peace</li>
+        </ul>
+      </div>
+
+      <div class="role-card course-card glass-panel highlight-card">
+        <i class="fas fa-ghost role-icon text-yellow" style="text-align: center; display: block;"></i>
+        <h3 class="text-yellow"> Power Unseen<br><span style="font-size: 1rem; color: #aaa; font-weight: 400;">Intuitive
+            Mastery</span></h3>
+        <ul class="course-list">
+          <li><i class="fas fa-bolt"></i> Develop hyper-situational awareness</li>
+          <li><i class="fas fa-bolt"></i> Understand micro non-verbal cues</li>
+          <li><i class="fas fa-bolt"></i> Cultivate deep intuitive defense</li>
+          <li><i class="fas fa-bolt"></i> Master the art of silent confidence</li>
+        </ul>
+      </div>
+
+      <div class="role-card course-card glass-panel">
+        <i class="fas fa-dumbbell role-icon" style="text-align: center; display: block;"></i>
+        <h3> Strength Beyond Muscle<br><span style="font-size: 1rem; color: #aaa; font-weight: 400;">Kinetic
+            Efficiency</span></h3>
+        <ul class="course-list">
+          <li><i class="fas fa-check"></i> Leverage advanced body mechanics</li>
+          <li><i class="fas fa-check"></i> Defeat larger & stronger opponents</li>
+          <li><i class="fas fa-check"></i> Harness and redirect kinetic energy</li>
+          <li><i class="fas fa-check"></i> Focus entirely on technique over force</li>
         </ul>
       </div>
 
@@ -379,7 +518,7 @@
         <h3>Weekend Batches</h3>
         <p class="days">Saturday & Sunday Morning</p>
         <ul class="times">
-          <li><i class="far fa-clock"></i> 6:00 AM - 7:00 AM</li>
+          <li><i class="far fa-clock"></i> 6:00 AM - 8:00 AM</li>
         </ul>
       </div>
     </div>
@@ -505,7 +644,6 @@
       <div class="contact-card glass-panel">
         <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
         <h3>Call Us Now</h3>
-        <a href="tel:+919940125730">+91 99401 25730</a>
         <a href="tel:+919566179262">+91 95661 79262</a>
       </div>
 
@@ -596,7 +734,7 @@
   </footer>
 
   <div id="imageLightbox" class="lightbox">
-    <span class="close-lightbox" id="closeLightbox">&times;</span>
+    <span class="close-lightbox" id="closeLightbox">×</span>
     <img class="lightbox-content" id="lightboxImg" src="">
   </div>
 
